@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WUtility — Windows, but yours</title>
+<meta name="description" content="Windows setup, debloat and tweaking tool. Everything WinUtil does with a mouse, WUtility does with one command. One script, one window, zero setup.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">WUtility <span>windows, but yours</span></div>
+    <nav>
+      <a href="#run">Run it</a>
+      <a href="#features">What it does</a>
+      <a href="#vs">vs WinUtil</a>
+      <a href="https://github.com/bckyle1-debug/WUtility">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero wrap">
+  <h1 class="anim anim-1">Set up Windows in <em>one command.</em></h1>
+  <p class="sub anim anim-2">Windows setup, debloat and tweaking — everything WinUtil does with a mouse,
+  WUtility does with one line. No downloads to keep, no installer, nothing left behind.</p>
+
+  <div class="cmd anim anim-3">
+    <span class="prompt">PS&gt;</span>
+    <code id="cmdtext">irm https://raw.githubusercontent.com/bckyle1-debug/WUtility/main/peak.ps1 | iex</code>
+    <button onclick="copyCmd(this)">Copy</button>
+  </div>
+  <div id="copied">Copied — paste it into PowerShell (run as Administrator).</div>
+  <div class="cmd-note">Windows 10 / 11 · PowerShell as Administrator · one line, zero files</div>
+</div>
+
+<section id="run" class="reveal">
+  <div class="wrap">
+    <h2>How to run</h2>
+    <p class="lead">Same model as christitus.com/win — copy, paste, done.</p>
+    <div class="steps">
+      <div class="card"><b><span class="num">1</span>Open PowerShell as admin</b>
+        <p>Right-click Start → <i>Terminal (Admin)</i> or <i>Windows PowerShell (Admin)</i>.</p></div>
+      <div class="card"><b><span class="num">2</span>Paste the command</b>
+        <p>The big purple <b>Copy</b> button above. Right-click into the window to paste.</p></div>
+      <div class="card"><b><span class="num">3</span>Use the GUI</b>
+        <p>Tweaks, app installs, debloat and Windows Update — all from one window.</p></div>
+    </div>
+
+    <ul class="feats">
+      <li>Nothing to install — the script downloads itself and runs from memory</li>
+      <li>Auto-elevates only when a task needs it (UAC prompt)</li>
+      <li>No winget on the PC? WUtility installs it for you and carries on</li>
+      <li>Prefer files? Download <code>peak.ps1</code> from GitHub and double-click — same tool</li>
+    </ul>
+  </div>
+</section>
+
+<section id="features" class="reveal">
+  <div class="wrap">
+    <h2>What it does</h2>
+    <p class="lead">Four tabs, one window, zero setup.</p>
+    <div class="steps">
+      <div class="card"><b>Tweaks</b><p>Privacy &amp; telemetry, performance, interface — 18 tweaks,
+        every one backed up and reversible individually.</p></div>
+      <div class="card"><b>Install</b><p>31 popular apps via winget. Shows what's already
+        installed and skips it automatically.</p></div>
+      <div class="card"><b>Debloat</b><p>41 bloat targets: Cortana, Copilot app, new Outlook,
+        Teams consumer, Solitaire pack, and Windows' "suggested apps" re-installer — with a
+        dry-run preview.</p></div>
+      <div class="card"><b>Windows Update</b><p>Security-only (patches now, feature updates
+        deferred a year), restore defaults, force a check — always reversible.</p></div>
+    </div>
+    <div class="warn">
+      <b>It won't break your PC.</b> Every registry change is backed up before it's applied,
+      every tweak has built-in revert values, debloat never touches Store, Defender or
+      Windows Update, and there's a full dry-run mode: preview everything, change nothing.
+    </div>
+  </div>
+</section>
+
+<section id="vs" class="reveal">
+  <div class="wrap">
+    <h2>Why not just WinUtil?</h2>
+    <p class="lead">Use WinUtil — it's great. But if you ever wanted to script it…</p>
+    <table>
+      <tr><th></th><th>WinUtil</th><th>WUtility</th></tr>
+      <tr><td>GUI</td><td class="yes">yes</td><td class="yes">yes — non-freezing worker, live log</td></tr>
+      <tr><td>CLI / one-line automation</td><td>no</td><td class="yes">full CLI: -List, -Install, -Tweaks, -UndoTweaks…</td></tr>
+      <tr><td>Undo a single tweak</td><td>not per-tweak</td><td class="yes">every tweak has revert values</td></tr>
+      <tr><td>Registry backup before changes</td><td>no</td><td class="yes">automatic, timestamped, every run</td></tr>
+      <tr><td>Dry-run preview</td><td>no</td><td class="yes">-Everything -DryRun</td></tr>
+      <tr><td>Auto-installs winget if missing</td><td>no</td><td class="yes">yes</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="cli" class="reveal">
+  <div class="wrap">
+    <h2>For the terminal people</h2>
+    <p class="lead">Everything the GUI does, scriptable. Requires the file version — grab <code>peak.ps1</code> from GitHub.</p>
+    <div class="cmd"><span class="prompt">PS&gt;</span><code>.\peak.ps1 -Install vscode,git,7zip -Tweaks privacy,ui -Updates security -Debloat</code></div>
+    <ul class="feats">
+      <li><code>.\peak.ps1 -List</code> — the full catalog: every tweak, app and feature</li>
+      <li><code>.\peak.ps1 -UndoTweaks ui</code> — revert exactly what you changed</li>
+      <li><code>.\peak.ps1 -Everything -DryRun</code> — preview everything, touch nothing</li>
+      <li><code>.\peak.ps1 -RestoreBackup &lt;timestamp&gt;</code> — re-import a registry backup</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>WUtility — windows, but yours. Free, open source, one file.</div>
+    <div><a href="https://github.com/bckyle1-debug/WUtility">github.com/bckyle1-debug/WUtility</a></div>
+  </div>
+</footer>
+
+<script>
+  // fade sections in as they scroll into view
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  function copyCmd(btn) {
+    var t = document.getElementById('cmdtext').textContent;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).then(function(){ showCopied(btn); });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = t; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta); showCopied(btn);
+    }
+  }
+  function showCopied(btn) {
+    btn.textContent = 'Copied ✓';
+    document.getElementById('copied').style.display = 'block';
+    setTimeout(function(){ btn.textContent = 'Copy'; }, 2000);
+  }
+</script>
+</body>
+</html>
